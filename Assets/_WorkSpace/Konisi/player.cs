@@ -4,6 +4,8 @@ public class player : MonoBehaviour
 {
     [SerializeField] int MoveSpeed;
     [SerializeField] float JumpForce = 350;
+    [SerializeField] GameObject Bullet;
+    [SerializeField] GameObject Muzzle;
 
     private Rigidbody2D _rig = null;
     private bool _isGrounded = false;
@@ -18,13 +20,19 @@ public class player : MonoBehaviour
     void Update()
     {
         Jump();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            BulletShot();
+        }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += new Vector3(-MoveSpeed * Time.deltaTime, 0); 
+            transform.position += new Vector3(-MoveSpeed * Time.deltaTime, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(MoveSpeed * Time.deltaTime, 0); 
+            transform.position += new Vector3(MoveSpeed * Time.deltaTime, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,5 +64,10 @@ public class player : MonoBehaviour
             _rig.AddForce(new Vector2(0, JumpForce));
             Debug.Log("ƒWƒƒƒ“ƒv“ñ’i–Ú");
         }
+    }
+
+    private void BulletShot()
+    {
+        Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
     }
 }
