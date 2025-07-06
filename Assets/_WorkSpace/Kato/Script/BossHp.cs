@@ -12,6 +12,8 @@ public class BossHp : MonoBehaviour
     int _BossHealth;
     [SerializeField]
     int _BossMaxHealth;
+    [SerializeField]
+    float _BossDestroyInterval;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,6 @@ public class BossHp : MonoBehaviour
 
     IEnumerator BossDestroyInterval()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(_BossDestroyInterval);
     }
 }
