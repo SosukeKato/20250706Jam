@@ -25,7 +25,12 @@ public class BossHp : MonoBehaviour
         }
         if (_BossHealth <= 0)
         {
-
+            StartCoroutine("BossDestroyInterval");
         }
+    }
+
+    IEnumerator BossDestroyInterval()
+    {
+        yield return null;
     }
 }
