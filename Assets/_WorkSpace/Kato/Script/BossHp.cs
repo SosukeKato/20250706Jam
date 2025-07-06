@@ -25,9 +25,9 @@ public class BossHp : MonoBehaviour
         
     }
 
-    public void ModifyHealth(int PlayerAttack)
+    public void ModifyHealth(int amount)
     {
-        _BossHealth -= PlayerAttack;
+        _BossHealth -= amount;
         if (_BossHealth <= 0)
         {
             RemovedComponent BossAttack;

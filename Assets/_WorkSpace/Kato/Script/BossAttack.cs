@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    int r;
     [SerializeField]
     List<GameObject> _BossAttack;
     [SerializeField]
@@ -11,21 +12,22 @@ public class BossAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("aaaa");
+        StartCoroutine("BossAttackInterval");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        r = Random.Range(0, _BossAttack.Count);
     }
 
-    IEnumerator aaaa()
+    IEnumerator BossAttackInterval()
     {
         while (true)
         {
             yield return new WaitForSeconds(_BossAttackInterval);
-            Debug.Log("aaaa");
+            Debug.Log("çUåÇÇµÇΩÇ®");
+            Instantiate(_BossAttack[r]);
         }
     }
 }
