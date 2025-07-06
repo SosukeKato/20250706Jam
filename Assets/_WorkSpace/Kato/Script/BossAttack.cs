@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    [SerializeField]
     List<GameObject> _BossAttack;
+    [SerializeField]
+    int _BossAttackInterval;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class BossAttack : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(_BossAttackInterval);
             Debug.Log("aaaa");
         }
     }
