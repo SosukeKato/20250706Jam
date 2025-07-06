@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    Rigidbody2D _rig = null;
+    [SerializeField] float JumpForce = 350;
+
+    private Rigidbody2D _rig = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,6 @@ public class player : MonoBehaviour
     }
     private void Jump()
     {
-
+        _rig.AddForce(new Vector2(0, JumpForce));
     }
 }
