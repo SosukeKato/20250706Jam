@@ -6,6 +6,8 @@ public class BossHp : MonoBehaviour
 {
     [SerializeField]
     int _BossHealth;
+    [SerializeField]
+    int _BossMaxHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +18,10 @@ public class BossHp : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ModifyHealth(int amount)
+    {
+        _BossHealth -= amount;
     }
 }
