@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent (typeof(CapsuleCollider2D))]
 public class BossHp : MonoBehaviour
 {
     [SerializeField]
@@ -17,11 +19,13 @@ public class BossHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        if (_BossHealth >= _BossMaxHealth)
+        {
+            _BossHealth = _BossMaxHealth;
+        }
+        if (_BossHealth <= 0)
+        {
 
-    public void ModifyHealth(int amount)
-    {
-        _BossHealth -= amount;
+        }
     }
 }
