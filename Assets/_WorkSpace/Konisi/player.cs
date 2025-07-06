@@ -3,9 +3,12 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     [SerializeField] int MoveSpeed;
+    [SerializeField] float BulletInterval;
     [SerializeField] float JumpForce = 350;
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Muzzle;
+
+    private float _bulletTimer;
 
     private Rigidbody2D _rig = null;
     private bool _isGrounded = false;
@@ -14,6 +17,7 @@ public class player : MonoBehaviour
     void Start()
     {
         _rig = GetComponent<Rigidbody2D>();
+        _bulletTimer = BulletInterval;
     }
 
     // Update is called once per frame
@@ -27,7 +31,7 @@ public class player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-MoveSpeed * Time.deltaTime, 0);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 10, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -68,6 +72,11 @@ public class player : MonoBehaviour
 
     private void BulletShot()
     {
-        Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
+        if (_bulletTimer < Time.time)
+        {
+            Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
+            _bulletTimer = Time.time + BulletInterval;
+            Debug.Log($"{_bulletTimer}");
+        }
     }
 }
