@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    List<GameObject> _BossAttack;
     // Start is called before the first frame update
     void Start()
     {
