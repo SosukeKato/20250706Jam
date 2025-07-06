@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent (typeof(CapsuleCollider2D))]
 public class BossHp : MonoBehaviour
 {
+    bool _BossExistence;
     [SerializeField]
     int _BossHealth;
     [SerializeField]
@@ -31,6 +33,6 @@ public class BossHp : MonoBehaviour
 
     IEnumerator BossDestroyInterval()
     {
-        yield return null;
+        yield return new WaitForSeconds(1);
     }
 }
