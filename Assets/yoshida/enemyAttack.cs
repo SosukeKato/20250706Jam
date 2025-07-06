@@ -37,7 +37,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (moveScript != null)
         {
-            isFacingLeft = moveScript.IsFacingLeft;
+            isFacingLeft = moveScript.IsFacingLeft; // ←ここで最新の向きを取得しているか？
         }
 
         UpdateThrowPointPosition();
@@ -48,12 +48,27 @@ public class EnemyAttack : MonoBehaviour
     /// </summary>
     void UpdateThrowPointPosition()
     {
-        // 右向きならそのまま、左向きならx座標を反転
-        float x = defaultThrowPointLocalPos.x * (isFacingLeft ? -1f : 1f);
+        Vector3 localPos = defaultThrowPointLocalPos;
 
-        // 反転後の位置を設定（YとZは変わらない）
-        throwPoint.localPosition = new Vector3(x, defaultThrowPointLocalPos.y, defaultThrowPointLocalPos.z);
+        // 親オブジェクトが左向き（スケール反転）なら投げる位置も反転
+        if (transform.parent != null)
+        {
+            if (transform.parent.localScale.x < 0)
+            {
+                localPos.x = -localPos.x;
+            }
+        }
+        else
+        {
+            if (transform.localScale.x < 0)
+            {
+                localPos.x = -localPos.x;
+            }
+        }
+
+        throwPoint.localPosition = localPos;
     }
+
 
     /// <summary>
     /// ハンマーを生成して、向きに合わせて飛ばす
