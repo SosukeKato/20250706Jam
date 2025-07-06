@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossHp : MonoBehaviour
 {
+    [SerializeField]
+    int _BossHealth;
     // Start is called before the first frame update
     void Start()
     {
