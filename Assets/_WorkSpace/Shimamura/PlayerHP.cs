@@ -26,10 +26,6 @@ public class PlayerHP : MonoBehaviour
         {
             Damage(1);
         }
-        if (collision.gameObject.tag == "DeathGimmick")
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void Damage(int damage)
