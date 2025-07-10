@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    [SerializeField, Header("HP")]
     public int Hp;
 
-    [SerializeField, Header(" FallDeath")]
+    [SerializeField]
     private int _fallDeath;
     // Start is called before the first frame update
     void Start()
@@ -30,9 +29,9 @@ public class PlayerHP : MonoBehaviour
 
     public void Damage(int damage)
     {
-        Hp = Mathf.Max(Hp - damage, 0);
+        Hp -= damage;
 
-        if (Hp == 0)
+        if (Hp <= 0)
         {
             Destroy(gameObject);
         }
