@@ -19,14 +19,14 @@ public class player : MonoBehaviour
     private float _swordTimer;
 
     private Rigidbody2D _rig = null;
-    private enemyAttck _enemyAttck = null;
+    private EnemyAttack _enemyAttck = null;
     private bool _isGrounded = false;
     private bool _isDoubleJump = true;
     // Start is called before the first frame update
     void Start()
     {
         _rig = GetComponent<Rigidbody2D>();
-        _enemyAttck = FindAnyObjectByType<enemyAttck>();
+        _enemyAttck = FindAnyObjectByType<EnemyAttack>();
         _bulletTimer = BulletInterval;
     }
 
@@ -57,7 +57,7 @@ public class player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Damage(_enemyAttck.);
+            Damage(_enemyAttck._power);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
