@@ -607,13 +607,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3e6b843d42cae458f91df561810180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerMoveSpeed: 0
-  PlayerHP: 0
+  PlayerMoveSpeed: 10
+  PlayerHP: 10
   JumpForce: 350
   BulletInterval: 1
   SwordInterval: 0.8
   SwordRemoveTime: 0.25
-  _fallDeath: 0
+  _fallDeath: -100
   Bullet: {fileID: 2144451100161650191, guid: eb65b4dd199245a4f87c51b990261859, type: 3}
   Muzzle: {fileID: 539535289}
   Slash: {fileID: 6815257517952879430, guid: a60386a8870a61c429296b14ebdd3810, type: 3}
