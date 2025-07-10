@@ -7,9 +7,12 @@ public class player : MonoBehaviour
     [SerializeField] float SwordInterval;
     [SerializeField] float SwordRemoveTime;
     [SerializeField] float JumpForce = 350;
+    [SerializeField] int _fallDeath;
+
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Muzzle;
     [SerializeField] GameObject Slash;
+    private GameObject SlashDeleat;
 
     private float _bulletTimer;
     private float _swordTimer;
@@ -27,18 +30,10 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Jump();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            BulletShot();
-        }
-        if (!Input.GetKeyDown(KeyCode.K))
-        {
-            SwordSlash();
-        }
+        Jump();
+        BulletShot();
+        SwordSlash();
+        FallDeath();
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-MoveSpeed * Time.deltaTime, 0);
@@ -67,12 +62,12 @@ public class player : MonoBehaviour
     }
     private void Jump()
     {
-        if (_isGrounded)
+        if ((Input.GetKeyDown(KeyCode.W)) &&_isGrounded)
         {
             _rig.AddForce(new Vector2(0, JumpForce));
             Debug.Log("ƒWƒƒƒ“ƒvˆê’i–Ú");
         }
-        if (!_isGrounded && _isDoubleJump)
+        if ((Input.GetKeyDown(KeyCode.W)) && !_isGrounded && _isDoubleJump)
         {
             _isDoubleJump = false;
             _rig.velocity = new Vector2(_rig.velocity.x, 0);
@@ -83,7 +78,7 @@ public class player : MonoBehaviour
 
     private void BulletShot()
     {
-        if (_bulletTimer < Time.time)
+        if (Input.GetKeyDown(KeyCode.J) && _bulletTimer < Time.time)
         {
             Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
             _bulletTimer = Time.time + BulletInterval;
@@ -92,12 +87,19 @@ public class player : MonoBehaviour
     }
     private void SwordSlash()
     {
-        if (_swordTimer < Time.time)
+        if (Input.GetKeyDown(KeyCode.K) && _swordTimer < Time.time)
         {
-            Instantiate(Slash, Muzzle.transform.position, transform.rotation);
+            SlashDeleat = Instantiate(Slash, Muzzle.transform.position, transform.rotation);
             _swordTimer = Time.time + SwordInterval;
-            Destroy(Slash, SwordRemoveTime);
+            Destroy( SlashDeleat,SwordRemoveTime);
             Debug.Log($"{_swordTimer}");
+        }
+    }
+    private void FallDeath()
+    {
+        if (transform.position.y < _fallDeath)
+        {
+            Destroy(gameObject);
         }
     }
 }
