@@ -57,7 +57,7 @@ public class player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Damage();
+            Damage(_enemyAttck.);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
