@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 749061369656149741}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,8 +180,9 @@ MonoBehaviour:
   hammerPrefab: {fileID: 2668917635423323561, guid: 431b8335a23454c479ae8b2078c70068, type: 3}
   throwPoint: {fileID: 1490708028751910552}
   throwForceX: 5
-  throwForceY: 7
+  throwForceY: 5
   throwInterval: 2
+  _power: 1
 --- !u!1 &1734121215232841035
 GameObject:
   m_ObjectHideFlags: 0
