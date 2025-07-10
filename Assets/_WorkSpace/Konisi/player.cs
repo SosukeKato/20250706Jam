@@ -23,7 +23,10 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Jump();
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Jump();
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             BulletShot();
@@ -56,12 +59,12 @@ public class player : MonoBehaviour
     }
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.W) && _isGrounded)
+        if (_isGrounded)
         {
             _rig.AddForce(new Vector2(0, JumpForce));
             Debug.Log("ƒWƒƒƒ“ƒvˆê’i–Ú");
         }
-        if (Input.GetKeyDown(KeyCode.W) && !_isGrounded && _isDoubleJump)
+        if (!_isGrounded && _isDoubleJump)
         {
             _isDoubleJump = false;
             _rig.velocity = new Vector2(_rig.velocity.x, 0);
