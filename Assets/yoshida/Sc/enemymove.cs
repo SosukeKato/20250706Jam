@@ -18,6 +18,11 @@ public class enemymove : MonoBehaviour
     float movedDistance = 0;
     Vector3 Lastpos = Vector3.zero;
 
+    public bool IsFacingLeft
+    {
+        get { return rightTleftF; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
