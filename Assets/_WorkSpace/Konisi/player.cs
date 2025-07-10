@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    [SerializeField] int MoveSpeed;
+    [SerializeField] int PlayerMoveSpeed;
+    [SerializeField] int PlayerHP;
+    [SerializeField] float JumpForce = 350;
     [SerializeField] float BulletInterval;
     [SerializeField] float SwordInterval;
     [SerializeField] float SwordRemoveTime;
-    [SerializeField] float JumpForce = 350;
     [SerializeField] int _fallDeath;
 
     [SerializeField] GameObject Bullet;
@@ -18,12 +19,14 @@ public class player : MonoBehaviour
     private float _swordTimer;
 
     private Rigidbody2D _rig = null;
+    private enemyAttck _enemyAttck = null;
     private bool _isGrounded = false;
     private bool _isDoubleJump = true;
     // Start is called before the first frame update
     void Start()
     {
         _rig = GetComponent<Rigidbody2D>();
+        _enemyAttck = FindAnyObjectByType<enemyAttck>();
         _bulletTimer = BulletInterval;
     }
 
@@ -36,12 +39,12 @@ public class player : MonoBehaviour
         FallDeath();
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += new Vector3(-MoveSpeed * Time.deltaTime, 0);
+            transform.position += new Vector3(-PlayerMoveSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.Euler(0, 10, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(MoveSpeed * Time.deltaTime, 0);
+            transform.position += new Vector3(PlayerMoveSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
@@ -51,6 +54,10 @@ public class player : MonoBehaviour
         {
             _isDoubleJump = true;
             _isGrounded = true;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Damage();
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -98,6 +105,15 @@ public class player : MonoBehaviour
     private void FallDeath()
     {
         if (transform.position.y < _fallDeath)
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void Damage(int damage)
+    {
+        PlayerHP -= damage;
+
+        if (PlayerHP <= 0)
         {
             Destroy(gameObject);
         }
