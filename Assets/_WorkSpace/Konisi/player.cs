@@ -4,11 +4,15 @@ public class player : MonoBehaviour
 {
     [SerializeField] int MoveSpeed;
     [SerializeField] float BulletInterval;
+    [SerializeField] float SwordInterval;
+    [SerializeField] float SwordRemoveTime;
     [SerializeField] float JumpForce = 350;
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Muzzle;
+    [SerializeField] GameObject Slash;
 
     private float _bulletTimer;
+    private float _swordTimer;
 
     private Rigidbody2D _rig = null;
     private bool _isGrounded = false;
@@ -27,9 +31,13 @@ public class player : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             BulletShot();
+        }
+        if (!Input.GetKeyDown(KeyCode.K))
+        {
+            SwordSlash();
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -80,6 +88,16 @@ public class player : MonoBehaviour
             Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
             _bulletTimer = Time.time + BulletInterval;
             Debug.Log($"{_bulletTimer}");
+        }
+    }
+    private void SwordSlash()
+    {
+        if (_swordTimer < Time.time)
+        {
+            Instantiate(Slash, Muzzle.transform.position, transform.rotation);
+            _swordTimer = Time.time + SwordInterval;
+            Destroy(Slash, SwordRemoveTime);
+            Debug.Log($"{_swordTimer}");
         }
     }
 }
