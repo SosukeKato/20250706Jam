@@ -15,6 +15,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private float throwInterval = 2f;
     private enemymove moveScript;
     private bool isFacingLeft = false;
+    public int _power = 1;
 
     void Start()
     {
