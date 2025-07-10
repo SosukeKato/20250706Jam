@@ -3,7 +3,7 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     [SerializeField] int PlayerMoveSpeed;
-    [SerializeField] int PlayerHP;
+    public int PlayerHP;
     [SerializeField] float JumpForce = 350;
     [SerializeField] float BulletInterval;
     [SerializeField] float SwordInterval;
@@ -96,7 +96,8 @@ public class player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K) && _swordTimer < Time.time)
         {
-            SlashDeleat = Instantiate(Slash, Muzzle.transform.position, transform.rotation);
+            Transform parent = this.transform;
+            SlashDeleat = Instantiate(Slash, Muzzle.transform.position, transform.rotation, parent);
             _swordTimer = Time.time + SwordInterval;
             Destroy( SlashDeleat,SwordRemoveTime);
             Debug.Log($"{_swordTimer}");
@@ -115,6 +116,7 @@ public class player : MonoBehaviour
 
         if (PlayerHP <= 0)
         {
+            Debug.Log("Ž€–S");
             Destroy(gameObject);
         }
     }
