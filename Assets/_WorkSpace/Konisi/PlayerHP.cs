@@ -7,18 +7,16 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] GameObject PlayerHPUI;
 
-    private List<GameObject> _players = new();
-
     private player _player;
+    private int _beforehp;
     // Start is called before the first frame update
     void Start()
     {
         _player = FindAnyObjectByType<player>();
-        GameObject PlayerHPUIClone = null;
         for (int i = 0; i < _player.PlayerHP; i++)
         {
-            PlayerHPUIClone = Instantiate(PlayerHPUI);
-            _players.Add(PlayerHPUIClone);
+            GameObject PlayerHPUIClone = Instantiate(PlayerHPUI);
+            PlayerHPUIClone.transform.parent = transform;
         }
     }
 
@@ -30,9 +28,11 @@ public class PlayerHP : MonoBehaviour
 
     public void SetHPUI(int Damage)
     {
-        for (int i = _players.Count + 1; i > Damage; i--)
+        Image[] icon = transform.GetComponentsInChildren<Image>();
+        for (int i = 0; i < icon.Length; i++)
         {
-            _players[i].SetActive(false);
+            icon[i].gameObject.SetActive(i < _player.GetPlayerHP());
         }
+        _beforehp = _player.GetPlayerHP();
     }
 }
