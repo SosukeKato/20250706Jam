@@ -7,14 +7,18 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] Image PlayerHPUI;
 
+    private List<Image> _players = new();
+
     private player _player;
     // Start is called before the first frame update
     void Start()
     {
         _player = FindAnyObjectByType<player>();
+        Image PlayerHPUIClone = null;
         for (int i = 0; i < _player.PlayerHP; i++)
         {
-            Instantiate(PlayerHPUI);
+            PlayerHPUIClone = Instantiate(PlayerHPUI);
+            _players.Add(PlayerHPUIClone);
         }
     }
 
@@ -22,5 +26,10 @@ public class PlayerHP : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetHPUI(int Damage)
+    {
+
     }
 }
