@@ -30,6 +30,7 @@ public class player : MonoBehaviour
         _enemyAttck = FindAnyObjectByType<EnemyAttack>();
         _playerHP = FindAnyObjectByType<PlayerHP>();
         _bulletTimer = BulletInterval;
+        GetPlayerHP();
     }
 
     // Update is called once per frame
@@ -115,6 +116,7 @@ public class player : MonoBehaviour
     private void Damage(int damage)
     {
         PlayerHP -= damage;
+        GetPlayerHP();
         _playerHP.SetHPUI(damage);
 
         if (PlayerHP <= 0)
