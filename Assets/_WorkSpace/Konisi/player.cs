@@ -20,6 +20,7 @@ public class player : MonoBehaviour
 
     private Rigidbody2D _rig = null;
     private EnemyAttack _enemyAttck = null;
+    private PlayerHP _playerHP;
     private bool _isGrounded = false;
     private bool _isDoubleJump = true;
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class player : MonoBehaviour
     {
         _rig = GetComponent<Rigidbody2D>();
         _enemyAttck = FindAnyObjectByType<EnemyAttack>();
+        _playerHP = FindAnyObjectByType<PlayerHP>();
         _bulletTimer = BulletInterval;
     }
 
@@ -113,6 +115,7 @@ public class player : MonoBehaviour
     private void Damage(int damage)
     {
         PlayerHP -= damage;
+        _playerHP.SetHPUI(damage);
 
         if (PlayerHP <= 0)
         {
