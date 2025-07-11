@@ -123,4 +123,8 @@ public class player : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public int GetPlayerHP()
+    {
+        return PlayerHP;
+    }
 }
