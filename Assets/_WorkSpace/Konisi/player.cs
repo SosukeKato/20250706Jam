@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class player : MonoBehaviour
@@ -50,11 +51,13 @@ public class player : MonoBehaviour
         {
             transform.position += new Vector3(-PlayerMoveSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.Euler(0, 10, 0);
+            _animator.SetBool("Ninja_run",true);
         }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(PlayerMoveSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            _animator.SetBool("Ninja_run",true);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,6 +70,7 @@ public class player : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Damage(_enemyAttck._power);
+            _animator.SetTrigger("Ninja_hurt");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -81,6 +85,7 @@ public class player : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.W)) &&_isGrounded)
         {
             _rig.AddForce(new Vector2(0, JumpForce));
+            _animator.SetTrigger("Ninja_jump");
             Debug.Log("ジャンプ一段目");
         }
         if ((Input.GetKeyDown(KeyCode.W)) && !_isGrounded && _isDoubleJump)
@@ -88,6 +93,7 @@ public class player : MonoBehaviour
             _isDoubleJump = false;
             _rig.velocity = new Vector2(_rig.velocity.x, 0);
             _rig.AddForce(new Vector2(0, JumpForce));
+            _animator.SetTrigger("Ninja_jump");
             Debug.Log("ジャンプ二段目");
         }
     }
@@ -96,6 +102,7 @@ public class player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J) && _bulletTimer < Time.time)
         {
+            _animator.SetTrigger("Ninja_Fireball");
             Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
             _bulletTimer = Time.time + BulletInterval;
             Debug.Log($"{_bulletTimer}");
@@ -106,6 +113,7 @@ public class player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && _swordTimer < Time.time)
         {
             Transform parent = this.transform;
+            _animator.SetTrigger("Ninja_Atk");
             SlashDeleat = Instantiate(Slash, Muzzle.transform.position, transform.rotation, parent);
             _swordTimer = Time.time + SwordInterval;
             Destroy( SlashDeleat,SwordRemoveTime);
