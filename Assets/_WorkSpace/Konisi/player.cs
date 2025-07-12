@@ -19,6 +19,7 @@ public class player : MonoBehaviour
     private float _swordTimer;
 
     private Rigidbody2D _rig = null;
+    private Animator _animator = null;
     private EnemyAttack _enemyAttck = null;
     private PlayerHP _playerHP;
     private bool _isGrounded = false;
@@ -27,6 +28,7 @@ public class player : MonoBehaviour
     void Start()
     {
         _rig = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _enemyAttck = FindAnyObjectByType<EnemyAttack>();
         _playerHP = FindAnyObjectByType<PlayerHP>();
         _bulletTimer = BulletInterval;
@@ -40,6 +42,10 @@ public class player : MonoBehaviour
         BulletShot();
         SwordSlash();
         FallDeath();
+        if (!Input.anyKey)
+        {
+            _animator.SetBool("Ninja_run", false);
+        }
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-PlayerMoveSpeed * Time.deltaTime, 0);
