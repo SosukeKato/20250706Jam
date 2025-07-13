@@ -5,10 +5,9 @@ using UnityEngine;
 public class enemydrop : MonoBehaviour
 {
     [Header("ドロップするアイテム（1つ）")]
-    [SerializeField] private GameObject dropItem;
-
+    public GameObject dropItem;
     [Header("アイテムの出現位置オフセット")]
-    [SerializeField] private Vector3 dropOffset = Vector3.up;
+    public Vector3 dropOffset = Vector3.up;
     private void Start()
     {
         Die();
@@ -18,7 +17,6 @@ public class enemydrop : MonoBehaviour
         DropItem();
         Destroy(gameObject);
     }
-
     void DropItem()
     {
         if (dropItem != null)

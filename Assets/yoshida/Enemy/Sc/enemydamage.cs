@@ -1,36 +1,33 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class enemydamage : MonoBehaviour
 {
-    [SerializeField, Tooltip("この敵の最大HP")]
-    private int _maxHP = 3;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [Header("この敵の最大HP")]
+    int _maxHP = 3;
+    [Header("ドロップアイテム")]
+    GameObject dropItem;
     private void OnTriggerEnter2D(Collider2D other)
     {
         TakeDamage(1); // ダメージ量は仮に1
     }
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _maxHP -= damage;
-
         if (_maxHP <= 0)
         {
+            DropItem();
             Destroy(gameObject);
         }
-
+    }
+    void DropItem()
+    {
+        if (dropItem != null)
+        {
+            Vector3 spawnPos = transform.position;
+            Instantiate(dropItem, spawnPos, Quaternion.identity);
+        }
     }
 }
+
 
 

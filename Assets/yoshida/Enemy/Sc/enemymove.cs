@@ -1,67 +1,54 @@
-
 using UnityEngine;
 
 public class enemymove : MonoBehaviour
 {
-    [SerializeField, Tooltip("移動速度")]
+    [Header("移動速度")]
     public float _speed;
-    [SerializeField, Tooltip("画面外でも行動する")]
+
+    [Header("画面外でも行動する")]
     public bool nonVisibleAct;
 
-    [SerializeField, Tooltip("ターンするまでの距離")]
-    private float _turnDistance = 5;
+    [Header("ターンするまでの時間")]
+    public float _turntime = 5;
 
-    private Rigidbody _rb = null;
+    private Rigidbody2D _rb = null;
     private Renderer _sr = null;
+
     private bool rightTleftF = false;
+    private float _timer = 0f;
+    private float _flipScale = 1;
 
-    float movedDistance = 0;
-    Vector3 Lastpos = Vector3.zero;
+    public bool IsFacingLeft => rightTleftF;
 
-    public bool IsFacingLeft
-    {
-        get { return rightTleftF; }
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<Renderer>();
-        Lastpos = transform.position;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-
-
-        if (_sr.isVisible || nonVisibleAct)//画面に写っているいるか判定
+        if (_sr.isVisible || nonVisibleAct) // 画面に映っている or 設定により常に動く
         {
-            //前回との差を求めて、移動距離を保存
-            movedDistance += Vector3.Distance(Lastpos, transform.position);
-            Lastpos = transform.position; //前回の位置を更新
+            _timer += Time.deltaTime;
 
-            //いっぱい歩いたらターンする
-            if (movedDistance >= _turnDistance)
+            if (_timer >= _turntime)
             {
-                rightTleftF = !rightTleftF; //逆にする
-                movedDistance = 0; //また数え始める
-            }
-      
-            Vector3 velocity = new Vector3(_speed, _rb.velocity.y,0);
-
-            if (rightTleftF) //左ならxを逆にする
-            {
-                velocity.x *= -1;
+                rightTleftF = !rightTleftF;
+                _flipScale *= -1;
+                _timer = 0f;
             }
 
-            transform.localScale = new Vector3(Mathf.Sign(velocity.x), 1, 1); //速度が乗ってる方向を見る
-            _rb.velocity = velocity;
+            // 向きを反転（スケール）
+            transform.localScale = new Vector3(_flipScale, 1, 1);
+
+            // 移動（Rigidbody2Dに対応）
+            _rb.velocity = new Vector2(_speed * _flipScale, _rb.velocity.y);
         }
         else
         {
-            _rb.Sleep();
+            // 画面外で非アクティブにする場合は停止
+            _rb.velocity = Vector2.zero;
         }
     }
-
 }
