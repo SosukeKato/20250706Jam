@@ -15,25 +15,25 @@ public class Portal : MonoBehaviour
         {
             _GetGemKey = true;
         }
-        else
-        {
-            _GetGemKey = false;
-        }
+        //else
+        //{
+        //    _GetGemKey = false;
+        //}
 
         if (collision.gameObject.CompareTag("BossGemKey"))
         {
             _GetBossGemKey = true;
         }
-        else
-        {
-            _GetBossGemKey = false;
-        }
+        //else
+        //{
+        //    _GetBossGemKey = false;
+        //}
 
         if ((collision.gameObject.CompareTag("Portal")) && _GetGemKey == true)
         {
             SceneManager.LoadScene("BossScene");
         }
-        if ((collision.gameObject.CompareTag("EndPortal") && _GetBossGemKey == true))
+        if ((collision.gameObject.CompareTag("EndPortal")/* && _GetBossGemKey == true*/))
         {
             SceneManager.LoadScene("ClearScene");
         }
