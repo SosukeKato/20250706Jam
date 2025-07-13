@@ -15,25 +15,35 @@ public class Portal : MonoBehaviour
         {
             _GetGemKey = true;
         }
+<<<<<<< HEAD:Assets/_WorkSpace/Kato/Scene/Script/Portal.cs
         //else
         //{
         //    _GetGemKey = false;
         //}
 
+=======
+>>>>>>> cbe622cd644f3b4cb132664be8058795d2e80d3e:Assets/_WorkSpace/Kato/Script/Portal.cs
         if (collision.gameObject.CompareTag("BossGemKey"))
         {
             _GetBossGemKey = true;
         }
+<<<<<<< HEAD:Assets/_WorkSpace/Kato/Scene/Script/Portal.cs
         //else
         //{
         //    _GetBossGemKey = false;
         //}
 
+=======
+>>>>>>> cbe622cd644f3b4cb132664be8058795d2e80d3e:Assets/_WorkSpace/Kato/Script/Portal.cs
         if ((collision.gameObject.CompareTag("Portal")) && _GetGemKey == true)
         {
             SceneManager.LoadScene("BossScene");
         }
+<<<<<<< HEAD:Assets/_WorkSpace/Kato/Scene/Script/Portal.cs
         if ((collision.gameObject.CompareTag("EndPortal")/* && _GetBossGemKey == true*/))
+=======
+        if (collision.gameObject.CompareTag("EndPortal") && _GetBossGemKey == true)
+>>>>>>> cbe622cd644f3b4cb132664be8058795d2e80d3e:Assets/_WorkSpace/Kato/Script/Portal.cs
         {
             SceneManager.LoadScene("ClearScene");
         }

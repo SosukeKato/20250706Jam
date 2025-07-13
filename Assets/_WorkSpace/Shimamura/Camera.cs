@@ -35,7 +35,7 @@ public class Camera : MonoBehaviour
         float y = _player.transform.position.y;
 
         //‚˜‚Ì’l‚ğƒJƒƒ‰‚Ì‰ŠúˆÊ’u‚©‚ç–³ŒÀ‚ÌŠÔ‚É§ŒÀ
-       // x = Mathf.Clamp(x, _Pos.x, Mathf.Infinity);
+        // x = Mathf.Clamp(x, _Pos.x, Mathf.Infinity);
 
         transform.position = new Vector3(x, y, transform.position.z);
     }
