@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/_WorkSpace/Shimamura/StageScene.unity
-    guid: 2e0e7225c5e3cc84d8ed2159edadee21
   m_configObjects: {}
