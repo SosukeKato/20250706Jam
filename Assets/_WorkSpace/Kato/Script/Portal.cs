@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     bool _GetGemKey;
+    bool _GetBossGemKey;
     [SerializeField]
     string _StageName;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,9 +20,22 @@ public class Portal : MonoBehaviour
             _GetGemKey = false;
         }
 
+        if (collision.gameObject.CompareTag("BossGemKey"))
+        {
+            _GetBossGemKey = true;
+        }
+        else
+        {
+            _GetBossGemKey = false;
+        }
+
         if ((collision.gameObject.CompareTag("Portal")) && _GetGemKey == true)
         {
-            SceneManager.LoadScene(_StageName);
+            SceneManager.LoadScene("BossScene");
+        }
+        if ((collision.gameObject.CompareTag("EndPortal") && _GetBossGemKey == true))
+        {
+            SceneManager.LoadScene("ClearScene");
         }
     }
 }

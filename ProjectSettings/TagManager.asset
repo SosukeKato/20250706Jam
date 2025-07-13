@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Portal
   - GemKey
+  - EndPortal
   layers:
   - Default
   - TransparentFX
