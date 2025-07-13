@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Ground
   - Portal
+  - GemKey
   layers:
   - Default
   - TransparentFX
