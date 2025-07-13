@@ -3,16 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-  - Enemy
-  - Ground
-<<<<<<< HEAD
-  - Portal
-  - GemKey
-  - EndPortal
-=======
->>>>>>> de198d5ce4fb7dc58b0af0d1e94e0f2ff7ffd042
+  tags: []
   layers:
   - Default
   - TransparentFX
