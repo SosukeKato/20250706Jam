@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class player : MonoBehaviour
@@ -9,7 +10,10 @@ public class player : MonoBehaviour
     [SerializeField] float BulletInterval;
     [SerializeField] float SwordInterval;
     [SerializeField] float SwordRemoveTime;
+    [SerializeField] float ShotWaitTime;
     [SerializeField] int _fallDeath;
+    [SerializeField] int BlinkCount;
+    [SerializeField] float BlinkWaitTime;
 
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Muzzle;
@@ -21,6 +25,7 @@ public class player : MonoBehaviour
 
     private Rigidbody2D _rig = null;
     private Animator _animator = null;
+    private SpriteRenderer _renderer;
     private EnemyAttack _enemyAttck = null;
     private PlayerHP _playerHP;
     private bool _isGrounded = false;
@@ -30,6 +35,7 @@ public class player : MonoBehaviour
     {
         _rig = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         _enemyAttck = FindAnyObjectByType<EnemyAttack>();
         _playerHP = FindAnyObjectByType<PlayerHP>();
         _bulletTimer = BulletInterval;
@@ -69,8 +75,8 @@ public class player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Damage(_enemyAttck._power);
-            _animator.SetTrigger("Ninja_hurt");
+            //Damage(_enemyAttck._power);
+            StartCoroutine(DamagedAnimation());
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -103,7 +109,7 @@ public class player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J) && _bulletTimer < Time.time)
         {
             _animator.SetTrigger("Ninja_Fireball");
-            Instantiate(Bullet, Muzzle.transform.position,transform.rotation);
+            StartCoroutine(DelayShot());
             _bulletTimer = Time.time + BulletInterval;
             Debug.Log($"{_bulletTimer}");
         }
@@ -142,5 +148,23 @@ public class player : MonoBehaviour
     public int GetPlayerHP()
     {
         return PlayerHP;
+    }
+
+    IEnumerator DamagedAnimation()
+    {
+        for (int i = 0; i < BlinkCount; i++)
+        {
+            yield return new WaitForSeconds(BlinkWaitTime);
+            _renderer.enabled = false;
+
+            yield return new WaitForSeconds(BlinkWaitTime);
+            _renderer.enabled = true;
+        }
+    }
+
+    IEnumerator DelayShot()
+    {
+        yield return new WaitForSeconds(ShotWaitTime);
+        Instantiate(Bullet, Muzzle.transform.position, transform.rotation);
     }
 }
