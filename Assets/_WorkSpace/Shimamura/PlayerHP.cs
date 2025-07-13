@@ -31,6 +31,7 @@ public class PlayerHP : MonoBehaviour
     public void Damage(int damage)
     {
         Hp = Mathf.Max(Hp - damage, 0);
+        Debug.Log(Hp);
 
         if (Hp == 0)
         {
