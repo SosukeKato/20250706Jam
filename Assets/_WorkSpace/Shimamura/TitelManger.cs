@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class TitelManger : MonoBehaviour
 {
+    private AudioSource _audiosource;
+
+    private AudioClip _Buttan;
     // Start is called before the first frame update
     void Start()
     {
