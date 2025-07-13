@@ -1,32 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class bullet : MonoBehaviour
+public class Slash : MonoBehaviour
 {
-    [SerializeField] int BulletSpeed;
-    [SerializeField] int BulletPower;
+    [SerializeField] int SlashDamage;
 
     private enemydamage _enemydamage;
     // Start is called before the first frame update
     void Start()
     {
         _enemydamage = FindAnyObjectByType<enemydamage>();
-        Destroy(gameObject, 3);
     }
 
     // Update is called once per frame
     void Update()
     {
-         transform.Translate(-BulletSpeed * Time.deltaTime,0,0);
+        
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            _enemydamage.TakeDamage(BulletPower);
+            _enemydamage.TakeDamage(SlashDamage);
             Destroy(gameObject);
         }
     }

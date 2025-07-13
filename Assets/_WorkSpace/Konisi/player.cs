@@ -25,7 +25,6 @@ public class player : MonoBehaviour
     private Rigidbody2D _rig = null;
     private Animator _animator = null;
     private SpriteRenderer _renderer;
-    private EnemyAttack _enemyAttck = null;
     private PlayerHP _playerHP;
     private bool _isGrounded = false;
     private bool _isDoubleJump = true;
@@ -35,7 +34,6 @@ public class player : MonoBehaviour
         _rig = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        _enemyAttck = FindAnyObjectByType<EnemyAttack>();
         _playerHP = FindAnyObjectByType<PlayerHP>();
         _bulletTimer = BulletInterval;
         GetPlayerHP();
@@ -74,7 +72,7 @@ public class player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Damage(_enemyAttck._power);
+            Damage(1);
             StartCoroutine(DamagedAnimation());
         }
     }
