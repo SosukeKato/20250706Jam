@@ -1,18 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine("BreakWaitTime");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator BreakWaitTime()
     {
-        
+        yield return new WaitForSeconds(2);
+        Destroy(gameObject);
     }
 }
